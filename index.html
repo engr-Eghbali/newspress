@@ -23,8 +23,32 @@
 
     <div class="container" id="main" role="main">
         <ul class="menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#s1">Menu 1</a>
+            <li><a href="#">خانه</a></li>
+            <li><a href="#">درباره ما</a></li>
+            <li><a href="#s1">گالری</a>
+                <ul class="submenu">
+                    <li><a href="#">دسته ۱</a></li>
+                    <li><a href="#">دسته ۲</a></li>
+                    <li><a href="#">دسته ۳</a></li>
+                    <li><a href="#">دسته ۴</a></li>
+                    <li><a href="#">دسته ۵</a></li>
+                    <li><a href="#">دسته ۶</a></li>
+                   
+                </ul>
+            </li>
+            <li class="active"><a href="#s2">محصولات</a>
+                <ul class="submenu">
+                    <li><a href="#">زیردسته ۱</a></li>
+                    <li><a href="#">زیردسته ۲</a></li>
+                    <li><a href="#">زیردسته ۳ </a></li>
+                    <li><a href="#">زیردسته ۴</a></li>
+                    <li><a href="#">زیردسته ۵</a></li>
+                    <li><a href="#">زیردسته ۶</a></li>
+                    <li><a href="#">زیردسته ۷</a></li>
+                    <li><a href="#">زیردسته ۸</a></li>
+                </ul>
+            </li>
+            <li><a href="#">معرفی</a>
                 <ul class="submenu">
                     <li><a href="#">Submenu a</a></li>
                     <li><a href="#">Submenu b</a></li>
@@ -36,58 +60,62 @@
                     <li><a href="#">Submenu h</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="#s2">Menu 2</a>
-                <ul class="submenu">
-                    <li><a href="#">Submenu a</a></li>
-                    <li><a href="#">Submenu b</a></li>
-                    <li><a href="#">Submenu c</a></li>
-                    <li><a href="#">Submenu d</a></li>
-                    <li><a href="#">Submenu e</a></li>
-                    <li><a href="#">Submenu f</a></li>
-                    <li><a href="#">Submenu g</a></li>
-                    <li><a href="#">Submenu h</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Menu 3</a>
-                <ul class="submenu">
-                    <li><a href="#">Submenu a</a></li>
-                    <li><a href="#">Submenu b</a></li>
-                    <li><a href="#">Submenu c</a></li>
-                    <li><a href="#">Submenu d</a></li>
-                    <li><a href="#">Submenu e</a></li>
-                    <li><a href="#">Submenu f</a></li>
-                    <li><a href="#">Submenu g</a></li>
-                    <li><a href="#">Submenu h</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Menu 4</a></li>
-            <li><a href="http://www.script-tutorials.com/whirling-dropdown-menu/">Back to tutorial</a></li>
+            
+            <li><a href="">ثبت سفارش    </a></li>
         </ul>
     </div>
 
 
       
+    <div id="videocont" style="text-align:center"> 
+        <button id="play" onclick="playPause()"></button> 
+        
+        <video id="video" width="720">
+          <source src="./css/video/sample.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div> 
+      
+      <div id="slider">
 
-    <div class="slideshow">
-	<ul>
-		<li><img src="./css/img/cake.png" alt="" /></li>
-		<li><img src="./css/img/pizza.png" alt=""  /></li>
-		<li><img src="./css/img/coffe.png" alt=""  /></li>
-		
-	</ul>
-</div>
+        <div class="slideshow">
+            <ul>
+                <li><img src="./css/img/cake.png" alt="" /></li>
+                <li><img src="./css/img/pizza.png" alt=""  /></li>
+                <li><img src="./css/img/coffe.png" alt=""  /></li>
+                
+            </ul>
+        </div>
+        
 
+    </div>
+
+    
 
 </body>
 
  
 <script type="text/javascript">
-   $(function(){
-      setInterval(function(){
-         $(".slideshow ul").animate({marginTop:-350},800,function(){
-            $(this).css({marginTop:0}).find("li:last").after($(this).find("li:first"));
-         })
-      }, 5000);
-   });
+  
+$(function(){
+    setInterval(function(){
+       $(".slideshow ul").animate({marginTop:-350},800,function(){
+          $(this).css({marginTop:0}).find("li:last").after($(this).find("li:first"));
+       })
+    }, 5000);
+ });
+
+ var myVideo = document.getElementById("video"); 
+
+function playPause() { 
+    if (myVideo.paused) {
+        myVideo.play(); 
+        myVideo.width = 720; 
+    }
+    else{ 
+        myVideo.pause(); 
+        myVideo.width = 720; 
+    }
+}
 </script>
 </html>
