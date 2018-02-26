@@ -1,121 +1,97 @@
-<!DOCTYPE html>
 <html>
-
+    <body>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydapi=device-dpi, user-scalable=no" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="./css/index.css">
-    <script src="./js/index.js"></script>
-  
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="./css/index.css" rel="stylesheet" id="indexcss">
+<script src="./js/index.js"></script>
 </head>
-<body>
 
-
-    <div class="container" id="main" role="main">
-        <ul class="menu">
-            <li><a href="#">خانه</a></li>
-            <li><a href="#">درباره ما</a></li>
-            <li><a href="#s1">گالری</a>
-                <ul class="submenu">
-                    <li><a href="#">دسته ۱</a></li>
-                    <li><a href="#">دسته ۲</a></li>
-                    <li><a href="#">دسته ۳</a></li>
-                    <li><a href="#">دسته ۴</a></li>
-                    <li><a href="#">دسته ۵</a></li>
-                    <li><a href="#">دسته ۶</a></li>
-                   
-                </ul>
-            </li>
-            <li class="active"><a href="#s2">محصولات</a>
-                <ul class="submenu">
-                    <li><a href="#">زیردسته ۱</a></li>
-                    <li><a href="#">زیردسته ۲</a></li>
-                    <li><a href="#">زیردسته ۳ </a></li>
-                    <li><a href="#">زیردسته ۴</a></li>
-                    <li><a href="#">زیردسته ۵</a></li>
-                    <li><a href="#">زیردسته ۶</a></li>
-                    <li><a href="#">زیردسته ۷</a></li>
-                    <li><a href="#">زیردسته ۸</a></li>
-                </ul>
-            </li>
-            <li><a href="#">معرفی</a>
-                <ul class="submenu">
-                    <li><a href="#">Submenu a</a></li>
-                    <li><a href="#">Submenu b</a></li>
-                    <li><a href="#">Submenu c</a></li>
-                    <li><a href="#">Submenu d</a></li>
-                    <li><a href="#">Submenu e</a></li>
-                    <li><a href="#">Submenu f</a></li>
-                    <li><a href="#">Submenu g</a></li>
-                    <li><a href="#">Submenu h</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="">ثبت سفارش    </a></li>
-        </ul>
+<div class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand" href="#" id="logo"></div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#" class="">الو#</a></li>
+                        <li class=" dropdown">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">سیاست<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class=" dropdown">
+                                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">داخلی</a>
+                                </li>
+                                <li><a href="#">خارجی</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">فرهنگ</a></li>
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">سرگرمی <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ورزشکاران</a></li>
+                                <li><a href="#">هنرمندان</a></li>
+                            </ul>
+                        </li>
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">اقتصاد <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ارز و سکه</a></li>
+                                <li><a href="#">بازار</a></li>
+                                <li><a href="#">نیازمندی</a></li>
+                            </ul>
+                        </li>
+                        <li class=" down"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">علمی<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ترفند</a></li>
+                                <li><a href="#">پاسخ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <div class="col-lg-6" id="search">
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                                <button class="btn btn-secondary" id="searchbtn" type="button">جست و جو</button>
+                              </span>
+                              <input type="text" class="form-control" placeholder="...بگرد برای">
+                            </div>
+                          </div>
+                        
+                </div>
+            </div>
+        </nav>
     </div>
+</div>
 
 
-      
-    <div id="videocont" style="text-align:center"> 
-        <button id="play" onclick="playPause()"></button> 
-        
-        <video id="video" width="720">
-          <source src="./css/video/sample.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div> 
-      
-      <div id="slider">
+<div id="press">
 
-        <div class="slideshow">
-            <ul>
-                <li><img src="./css/img/cake.png" alt="" /></li>
-                <li><img src="./css/img/pizza.png" alt=""  /></li>
-                <li><img src="./css/img/coffe.png" alt=""  /></li>
-                
-            </ul>
-        </div>
-        
-
+    <div id="pressbar">
+            <form id="updown">
+                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"></div>
+                    <input type="number" id="number" value="0" />
+                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"></div>
+                  </form>
+                  <div class="value-button" id="share" onclick="getlink()" value="id-123"></div>
     </div>
+        
 
-    
+
+
+
+
+</div>
+
+
+
+
 
 </body>
-
- 
-<script type="text/javascript">
-  
-$(function(){
-    setInterval(function(){
-       $(".slideshow ul").animate({marginTop:-350},800,function(){
-          $(this).css({marginTop:0}).find("li:last").after($(this).find("li:first"));
-       })
-    }, 5000);
- });
-
- var myVideo = document.getElementById("video"); 
-
-function playPause() { 
-    if (myVideo.paused) {
-        myVideo.play(); 
-        myVideo.width = 720; 
-    }
-    else{ 
-        myVideo.pause(); 
-        myVideo.width = 720; 
-    }
-}
-</script>
 </html>
