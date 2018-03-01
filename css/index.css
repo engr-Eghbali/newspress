@@ -80,7 +80,7 @@ border: none;
 
 }
 
-#press{
+.press{
    margin-top: 1em;
     width: 100%;
     height: 40%;
@@ -100,7 +100,7 @@ border: none;
     z-index: 1000;
 }
 
-#updown {
+.updown {
     width: 25%;
    float: right;
     text-align: left;
@@ -130,22 +130,22 @@ border: none;
     cursor: pointer;
   }
   
-  #updown #decrease {
+  .updown #decrease {
     margin-right: -4px;
     border-radius: 8px 0 0 8px;
   }
   
-  #updown #increase {
+  .updown #increase {
     margin-left: -4px;
     border-radius: 0 8px 8px 0;
   }
   
-  #updown #input-wrap {
+  .updown #input-wrap {
     margin: 0px;
     padding: 0px;
   }
   
-  input#number {
+  input.number {
     text-align: center;
     border: none;
     border-top: 1px solid #ddd;
@@ -183,7 +183,7 @@ height: 90%
         
       }
 
-#number{
+.number{
     height: 80%;
     width: 40%;
     border-radius: 15%;
@@ -204,7 +204,7 @@ height: 90%
         padding: 0;
        
           }
-#pressbar{
+.pressbar{
 
     width: 70%;
     height: 25%;
@@ -231,7 +231,7 @@ height: 90%
         color:#7800af ;
       }
 
-    #content{
+    .content{
       height: 70%;
       width: 70%;
       border: orangered 2px solid;
@@ -243,12 +243,12 @@ height: 90%
       
       
     }
-      #matn{
+      .matn{
           overflow-y: scroll;
           float: right;
           padding: 2% 2% 2% 2%;
       }
-      #ax{
+      .ax{
 
         float:left;
         padding: 1% 1% 1% 1%;
