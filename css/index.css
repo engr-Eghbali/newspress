@@ -84,6 +84,7 @@ border: none;
    margin-top: 1em;
     width: 100%;
     height: 40%;
+    direction: rtl;
 }
 
 #container{
@@ -324,7 +325,7 @@ height: 90%
 }
 
 #name{
-
+  direction: rtl;
   float: right;
   margin-top: 1em;
   outline: none;
@@ -353,7 +354,7 @@ height: 90%
   overflow-y:scroll; 
   clear: both;
   border-radius: 15px;
-  
+  direction: rtl;
 
 }
 
