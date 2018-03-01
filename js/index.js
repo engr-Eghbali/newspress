@@ -1,3 +1,4 @@
+
 function increaseValue() {
   var value = parseInt(document.getElementById('number').value, 10);
   value = isNaN(value) ? 0 : value;
@@ -13,7 +14,31 @@ function decreaseValue() {
   document.getElementById('number').value = value;
 }
 
+
+function showleaf(){
+  
+  $('#dialogue').click(function(){
+    $('#leaf').show(500);
+});
+ }
+
+ function clsleaf() {
+   
+  $('#clsbox').click(function(){
+    $('#leaf').hide(500);
+ });
+ }
+
 $(document).ready(function(){
+  
+  $('#leaf').hide();
+
+
+
+
+
+
+
 
 
 
@@ -209,11 +234,7 @@ switch (monthdte) {
 document.getElementById("time").innerHTML = "امروز "+today+"&nbsp;"+daysun+"&nbsp;"+sunmonth+"&nbsp;"+sunyear;
 
 
-
-
-
-
-
+    
 
 
 
