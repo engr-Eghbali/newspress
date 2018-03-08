@@ -262,7 +262,7 @@ height: 90%
     footer{
         width: 100%;
         height: auto;
-        background-color: tomato
+        background-color: tomato;
     }
     #dialogue{
 
@@ -441,4 +441,18 @@ height: 90%
       background-size:100% 100%;
       background-repeat: no-repeat;
       background-position-x: 50%;
+    }
+
+    .editbtn{
+      background-image: url("./img/edit.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-color: transparent;
+      border:none;
+      outline: none;
+      width:15%;
+      height: 90%;
+      float: left;
+      margin-top: 0;
+      padding: 0;
     }
