@@ -31,8 +31,10 @@ function showleaf(){
 
 $(document).ready(function(){
   
-  $('#leaf').hide();
-
+ 
+    
+    $('#leaf').hide();
+    $('#splash').fadeOut(2000);
 
 
 
