@@ -114,11 +114,13 @@
 <div id="container">
        
     <p id="time"></p> 
-
+    <p id="profile"></p>
     <div id="login" >
-        <input type="text" style="direction:rtl;" id="username" placeholder="نام کاربری">
-        <input type="password" style="direction:rtl;" id="pass" placeholder="گذرواژه">
-        <button type="button" style="direction:rtl;"  id="logon"></button>
+        <input type="text" style="direction:rtl;" id="username" placeholder="نام کاربری" required>
+        <input type="password" style="direction:rtl;" id="pass" placeholder="گذرواژه" required>
+        <input type="email" style="direction:rtl;" id="mail" placeholder="پست الکترونیکی" >
+        <button type="button" style="direction:rtl;"  id="logon" onclick="login()"></button>
+        <a href="#" onclick="showSubmit()" id="showSubmit">ثبت نام</a>
     </div>
 
 
@@ -126,9 +128,9 @@
                 
                     <div class="pressbar" id="pressbar-1">
                             <form class="updown" id="updown-1">
-                                    <div class="value-button"  id="decrease" onclick="decreaseValue('number-1')" value="Decrease Value"></div>
-                                    <input class="number" type="number" id="number-1" value="0" />
-                                    <div class="value-button" id="increase" onclick="increaseValue('number-1')" value="Increase Value"></div>
+                                    <div class="value-button"  id="decrease" onclick="decreaseValue('like-1')" value="Decrease Value"></div>
+                                    <p class="like" id="like-1">+1</p>
+                                    <div class="value-button" id="increase" onclick="increaseValue('like-1')" value="Increase Value"></div>
                                   </form>
                                   
                                   <div class="value-button" id="share" onclick="getlink()" value="id-123"></div>
@@ -152,9 +154,9 @@
                         
                         <div class="pressbar" id="pressbar-2">
                                 <form class="updown" id="updown-2">
-                                        <div class="value-button"  id="decrease" onclick="decreaseValue('number-2')" value="Decrease Value"></div>
-                                            <input class="number" type="number" id="number-2" value="0" />
-                                            <div class="value-button" id="increase" onclick="increaseValue('number-2')" value="Increase Value"></div>
+                                        <div class="value-button"  id="decrease" onclick="decreaseValue('like-2')" value="Decrease Value"></div>
+                                        <p class="like" id="like-2">+1</p>
+                                            <div class="value-button" id="increase" onclick="increaseValue('like-2')" value="Increase Value"></div>
                                           </form>
                                           <div class="value-button" id="share" onclick="getlink()" value="id-123"></div>
                                           <div class="a1" style="color:rgb(251, 255, 0);">۱۲۳ نظر </div>
@@ -178,9 +180,9 @@
                                 
                                     <div class="pressbar" id="pressbar-3">
                                             <form class="updown" id="updown-3">
-                                                    <div class="value-button" id="decrease" onclick="decreaseValue('number-3')" value="Decrease Value"></div>
-                                                    <input type="number" class="number" id="number-3" value="0" />
-                                                    <div class="value-button" id="increase" onclick="increaseValue('number-3')" value="Increase Value"></div>
+                                                    <div class="value-button" id="decrease" onclick="decreaseValue('like-3')" value="Decrease Value"></div>
+                                                    <p class="like" id="like-3">+1</p>
+                                                    <div class="value-button" id="increase" onclick="increaseValue('like-3')" value="Increase Value"></div>
                                                   </form>
                                                   <div class="value-button" id="share" onclick="getlink()" value="id-123"></div>
                                                   <div class="a1" style="color:rgb(251, 255, 0);">۱۲۳ نظر </div>
@@ -203,9 +205,9 @@
                                         
                                             <div class="pressbar" id="pressbar-4">
                                                     <form class="updown" id="updown-4">
-                                                            <div class="value-button" id="decrease" onclick="decreaseValue('number-4')" value="Decrease Value"></div>
-                                                            <input class="number" type="number" id="number-4" value="0" />
-                                                            <div class="value-button" id="increase" onclick="increaseValue('number-4')" value="Increase Value"></div>
+                                                            <div class="value-button" id="decrease" onclick="decreaseValue('like-4')" value="Decrease Value"></div>
+                                                            <p class="like" id="like-4">+1</p>
+                                                            <div class="value-button" id="increase" onclick="increaseValue('like-4')" value="Increase Value"></div>
                                                           </form>
                                                           <div class="value-button" id="share" onclick="getlink()" value="id-123"></div>
                                                           <div class="a1" style="color:rgb(251, 255, 0);">۱۲۳ نظر </div>

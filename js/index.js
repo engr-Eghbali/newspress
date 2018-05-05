@@ -1,17 +1,99 @@
+function submit(){
+    var userName=$("#username").val();
+    var password=$("#pass").val();
+    var mail=$("#mail").val();
+    if (mail.length<7 || !mail.includes("@")){
+        alert("پست الکترونیکی خود را به درستی وارد کنید");
+        
+    }else{
 
+        var xhttp = new XMLHttpRequest();
+        var datas ="user="+userName+"&pass="+password+"&mail="+mail
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+      
+            var resp=this.responseText.split("&");
+            if(resp[0]=="1"){
+                login();
+            }else{
+                alert("مجددا تلاش کنید");
+            }
+             
+           
+          }
+        };
+      
+        xhttp.open("POST", "http://localhost:3000/submit", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(datas);
+      
+    }             
+ 
+
+}
+
+
+function login(){
+    var userName=$("#username").val();
+    var password=$("#pass").val();
+    
+           
+  var xhttp = new XMLHttpRequest();
+  var datas ="user="+userName+"&pass="+password;
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        var resp=this.responseText.split("&");
+        if(resp[0]=="1"){
+
+            localStorage.setItem("pressUser",resp[1]);
+            $("#profile").text(resp[1]+"خوش آمدید");
+            $("#login").hide(100);
+        }else{
+            localStorage.removeItem("pressUser");
+            alert("خطا...مجددا تلاش کنید");
+        }
+       
+
+       
+     
+    }
+  };
+
+  xhttp.open("POST", "http://localhost:3000/login", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(datas);
+
+
+}
+
+
+
+
+
+
+function showSubmit(){
+    $("#mail").show(200);
+    $("#showSubmit").hide();
+    $("#logon").css("background-color","blue");
+    $("#logon").attr("onclick","submit()");
+}
+  
 function increaseValue(id) {
-  var value = parseInt(document.getElementById(id).value, 10);
+  var ID="#"+id
+  var value = parseInt($(ID).text(), 10);
   value = isNaN(value) ? 0 : value;
   value++;
-  document.getElementById(id).value = value;
+  $(ID).text("+"+value) ;
 }
 
 function decreaseValue(id) {
-  var value = parseInt(document.getElementById(id).value, 10);
+  var ID="#"+id  
+  var value =parseInt($(ID).text(), 10);
   value = isNaN(value) ? 0 : value;
   value < 1 ? value = 1 : '';
   value--;
-  document.getElementById(id).value = value;
+  $(ID).text("+"+value) ;
 }
 
 
