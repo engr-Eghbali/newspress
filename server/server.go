@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	auth "./packages/auth"
 	req "./packages/req"
@@ -18,19 +19,33 @@ func Preview_ctrl(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 
 		var user string
-		var pass string
-
+		var key string
+		var result string
 		r.ParseForm()
 		user = r.Form["user"][0]
-		pass = r.Form["pass"][0]
+		key = r.Form["key"][0]
 
-		code, flg := req.PreviewProcess(user, pass)
+		resp, flg := req.PreviewProcess(user)
+
+		if key != "0" {
+
+			for _, temp := range resp {
+				result = result + "<div class=\"press\" id=\"" + temp.ID.Hex() + "\"><div class=\"pressbar\" id=\"pressbar-" + temp.ID.Hex() + "1\"><form class=\"updown\" id=\"updown-" + temp.ID.Hex() + "\"><div class=\"value-button\"  id=\"decrease\" onclick=\"decreaseValue('like-" + temp.ID.Hex() + "')\" value=\"Decrease Value\"></div><p class=\"like\" id=\"like-" + temp.ID.Hex() + "\">+" + strconv.Itoa(len(temp.Likes)) + "</p><div class=\"value-button\" id=\"increase\" onclick=\"increaseValue('like-" + temp.ID.Hex() + "')\" value=\"Increase Value\"></div></form><div class=\"value-button\" id=\"share\" onclick=\"getlink()\" value=\"id-" + temp.ID.Hex() + "\"></div><div class=\"a1\" style=\"color:rgb(251, 255, 0);\">" + strconv.Itoa(len(temp.Comments)) + " نظر </div><div class=\"a1\" style=\"color:orangered;\">" + temp.Date + "  " + temp.Time + " </div> <div class=\"editbtn\" ></div>	</div><div class=\"content\" id=\"content-" + temp.ID.Hex() + "\"><div class=\"matn\" id=\"matn-" + temp.ID.Hex() + "\"><p1>:" + temp.Author + "</p1><p1>" + temp.Text + "</div><div class=\"ax\" id=\"ax-" + temp.ID.Hex() + "\" style=\"background-image:url(" + temp.File + ")\" ></div></div></div>"
+			}
+
+		} else {
+
+			for _, temp := range resp {
+				result = result + "<div class=\"press\" id=\"" + temp.ID.Hex() + "\"><div class=\"pressbar\" id=\"pressbar-" + temp.ID.Hex() + "1\"><form class=\"updown\" id=\"updown-" + temp.ID.Hex() + "\"><div class=\"value-button\"  id=\"decrease\" onclick=\"decreaseValue('like-" + temp.ID.Hex() + "')\" value=\"Decrease Value\"></div><p class=\"like\" id=\"like-" + temp.ID.Hex() + "\">+" + strconv.Itoa(len(temp.Likes)) + "</p><div class=\"value-button\" id=\"increase\" onclick=\"increaseValue('like-" + temp.ID.Hex() + "')\" value=\"Increase Value\"></div></form><div class=\"value-button\" id=\"share\" onclick=\"getlink()\" value=\"id-" + temp.ID.Hex() + "\"></div><div class=\"a1\" style=\"color:rgb(251, 255, 0);\">" + strconv.Itoa(len(temp.Comments)) + " نظر </div><div class=\"a1\" style=\"color:orangered;\">" + temp.Date + "  " + temp.Time + " </div>	</div><div class=\"content\" id=\"content-" + temp.ID.Hex() + "\"><div class=\"matn\" id=\"matn-" + temp.ID.Hex() + "\"><p1>:" + temp.Author + "</p1><p1>" + temp.Text + "</div><div class=\"ax\" id=\"ax-" + temp.ID.Hex() + "\" style=\"background-image:url(" + temp.File + ")\" ></div></div></div>"
+			}
+
+		}
 
 		if flg {
-			fmt.Fprintf(w, "1"+code)
+			fmt.Fprintf(w, result)
 			return
 		} else {
-			fmt.Fprintf(w, "0"+code)
+			fmt.Fprintf(w, "0")
 			return
 		}
 

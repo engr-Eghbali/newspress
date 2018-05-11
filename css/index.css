@@ -251,6 +251,7 @@ height: 90%
           overflow-y: scroll;
           float: right;
           padding: 2% 2% 2% 2%;
+          width: 40vh;
       }
       .ax{
 
