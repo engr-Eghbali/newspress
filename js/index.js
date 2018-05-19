@@ -14,7 +14,7 @@ function submit(){
       
             var resp=this.responseText.split("&");
             if(resp[0]=="1"){
-                login();
+                login(userName,password);
             }else{
                 alert("مجددا تلاش کنید");
             }
@@ -33,9 +33,9 @@ function submit(){
 }
 
 
-function login(){
-    var userName=$("#username").val();
-    var password=$("#pass").val();
+function login(u,p){
+    var userName=u;
+    var password=p;
     
            
   var xhttp = new XMLHttpRequest();
@@ -47,6 +47,7 @@ function login(){
         if(resp[0]=="1"){
 
             localStorage.setItem("pressUser",resp[1]);
+            localStorage.setItem("pressPass",password);
             $("#profile").text(resp[1]+"خوش آمدید");
             $("#login").hide(100);
         }else{
@@ -67,7 +68,11 @@ function login(){
 
 }
 
-
+function dologin(){
+    var u=$("#username").val();
+    var p=$("#pass").val();
+    login(u,p);
+}
 
 
 
@@ -80,20 +85,89 @@ function showSubmit(){
 }
   
 function increaseValue(id) {
-  var ID="#"+id
-  var value = parseInt($(ID).text(), 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  $(ID).text("+"+value) ;
+   
+  var username=localStorage.getItem("pressUser");  
+  if  (username ==""){
+      alert("ابتدا باید ثبت نام کنید یا وارد شوید");
+
+  }else{
+
+    var newsID=id.replace("like-","");
+  
+    var xhttp = new XMLHttpRequest();
+    var datas ="username="+username+"&newsID="+newsID;
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+  
+          var resp=this.responseText;
+          if(resp=="1"){
+  
+            
+                     var cssID="#"+id
+                     var value = parseInt($(cssID).text(), 10);
+                     value = isNaN(value) ? 0 : value;
+                     value++;
+                     $(cssID).text("+"+value) ;
+          }
+         
+  
+         
+       
+      }
+
+  };
+
+  xhttp.open("POST", "http://localhost:3000/like", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(datas);
+
+  }
+
 }
 
+
+
+
 function decreaseValue(id) {
-  var ID="#"+id  
-  var value =parseInt($(ID).text(), 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  $(ID).text("+"+value) ;
+
+
+    var username=localStorage.getItem("pressUser");  
+    if  (username ==""){
+        alert("ابتدا باید ثبت نام کنید یا وارد شوید");
+  
+    }else{
+  
+      var newsID=id.replace("like-","");
+    
+      var xhttp = new XMLHttpRequest();
+      var datas ="username="+username+"&newsID="+newsID;
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+    
+            var resp=this.responseText;
+            if(resp=="1"){
+    
+                var cssID="#"+id  
+                var value =parseInt($(cssID).text(), 10);
+                value = isNaN(value) ? 0 : value;
+                value < 1 ? value = 1 : '';
+                value--;
+                $(cssID).text("+"+value) ;
+              
+            }
+    
+           
+         
+        }
+  
+    };
+  
+    xhttp.open("POST", "http://localhost:3000/dislike", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(datas);
+  
+    }  
+    ////////////////////////////
 }
 
 
@@ -159,9 +233,10 @@ $(document).ready(function(){
     $('#splash').fadeOut(2000);
 
     getLastNews();
-
-
-
+    
+    if(localStorage.getItem("pressUser")!=""){
+        login(localStorage.getItem("pressUser"),localStorage.getItem("pressPass"));
+    }
 
 
 
