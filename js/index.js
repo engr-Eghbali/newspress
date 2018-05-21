@@ -37,6 +37,9 @@ function login(u,p){
     var userName=u;
     var password=p;
     
+    if(userName.length<3 || password<3){
+        return
+    }
            
   var xhttp = new XMLHttpRequest();
   var datas ="user="+userName+"&pass="+password;
@@ -48,7 +51,7 @@ function login(u,p){
 
             localStorage.setItem("pressUser",resp[1]);
             localStorage.setItem("pressPass",password);
-            $("#profile").text(resp[1]+"خوش آمدید");
+            $("#profile").text(resp[1]+"خوش آمدید،برای خروج کلیک کنید");
             $("#login").hide(100);
         }else{
             localStorage.removeItem("pressUser");
@@ -75,7 +78,11 @@ function dologin(){
 }
 
 
-
+function logout(){
+    localStorage.removeItem("pressUser");
+    localStorage.removeItem("pressPass");
+    location.reload();
+}
 
 function showSubmit(){
     $("#mail").show(200);
