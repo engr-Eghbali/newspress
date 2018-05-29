@@ -37,7 +37,7 @@ function login(u,p){
     var userName=u;
     var password=p;
     
-    if(userName.length<3 || password<3){
+    if(userName==null || password==null){
         return
     }
            
@@ -51,7 +51,7 @@ function login(u,p){
 
             localStorage.setItem("pressUser",resp[1]);
             localStorage.setItem("pressPass",password);
-            $("#profile").text(resp[1]+"خوش آمدید،برای خروج کلیک کنید");
+            $("#profile").text(resp[1]+"خوش آمدید،برای خروج کلیک کنید ");
             $("#login").hide(100);
         }else{
             localStorage.removeItem("pressUser");

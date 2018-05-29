@@ -13,7 +13,7 @@ type News struct {
 	Author   string        `json:"author"`
 	Likes    []string      `json:"likes"`
 	Date     string        `json:"date"`
-	Time     string        `json:"time"`
+	Title    string        `json:"title"`
 	Text     string        `json:"text"`
 	Cat      string        `json:"cat"`
 	Keyword  string        `json:"keyword"`
@@ -124,4 +124,92 @@ func DisLike(user string, newsID string) (flag bool) {
 	}
 	return false
 
+}
+
+func More(newsID string) (resp News, flag bool) {
+
+	var result News
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return result, false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("news").C("news")
+
+	err = c.FindId(bson.ObjectIdHex(newsID)).One(&result)
+
+	if err != nil {
+
+		log.Print(err)
+		log.Print("\n")
+		return result, false
+	} else {
+
+		return result, true
+	}
+}
+
+func Cm(newsID string, user string, cm string) (flag bool) {
+
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("news").C("news")
+	idQuerier := bson.M{"_id": bson.ObjectIdHex(newsID)}
+	change := bson.M{"$push": bson.M{"comments": user + "@" + cm}}
+	err = c.Update(idQuerier, change)
+	if err != nil {
+		log.Print("failed to follow:")
+		log.Print(err)
+		return false
+	} else {
+		log.Print("user commented")
+		return true
+	}
+}
+
+func SendNews(user string, title string, keywords string, time string, text string) (flag bool, fileid string) {
+
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return false, ""
+	} else {
+
+		id := bson.NewObjectId()
+		defer session.Close()
+		session.SetMode(mgo.Monotonic, true)
+		c := session.DB("news").C("news")
+
+		err = c.Insert(&News{ID: id, Author: user, Date: time, Title: title, Text: text, Cat: "freshnews", Keyword: keywords, File: "S:\\newsPress\\server\\files\\" + id.Hex() + ".jpg"})
+
+		if err != nil {
+
+			log.Print(err)
+			return false, ""
+
+		} else {
+			fileid = id.Hex()
+			log.Print("\n news Inserted:")
+			return true, id.Hex()
+		}
+
+	}
 }

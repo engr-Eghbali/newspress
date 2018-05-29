@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/default/default.css" type="text/css" media="screen" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<script src="jquery.nivo.slider.pack.js" type="text/javascript"></script>
+		<script src="js/index.js" type="text/javascript"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+		
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <title>Source X SRT</title>
+    </head>
+	<body id="home">
+     <div id="profile"></div>
+
+
+		<div id="newsForm">
+
+			<div id="contains">
+			<button id="closeForm" onclick="closeForm()">X</button>	
+			<br>
+			<input id="newsTitle" type="text" placeholder="عنوان خبر" required>
+			<br>
+			<input id="newsCategory" type="text" placeholder="دسته بندی(کلمات کلیدی را بافاصله جدا کنید)" required>
+			<br>
+			<textarea id="newsText" placeholder="متن خبر"></textarea>
+			<br>
+			<input id="newsFile" type="file" accept="images">
+			<br>
+			<button id="sendNews">درج خبر</button>
+		</div>
+		</div>
+
+
+		<div id="showNews">
+
+			<div id="post">
+				<button id="clsCm" onclick="clsCm()">X</button>
+				<img src="images/1.jpg">
+				<br>
+				<div id="newsStat">
+					<p id="likes"> <i class="far fa-heart"></i> 12 </p>
+					<p id="edit"><i class="far fa-edit"></i>   ویرایش  </p>
+					<p id="date">1397/03/01</p>
+				</div>
+			
+				<input id="inputCm" placeholder="  نظر بدهید..." >
+				<button id="sendCm" >ارسال</button>
+				<div id="cms">
+					<div class="cm">
+						<p>مهسا:</p>
+						<p>مفید بود تشکر</p>
+					</div>
+					<div class="cm">
+						<p>کاربر:</p>
+						<p>کامنت کاربر دیگر</p>
+					</div>
+
+				</div>
+				
+                <div class="textCm">
+						در حالی که دونالد ترامپ، رئیس‌جمهوری آمریکا توافق هسته‌ای با ایران، موسوم به برجام، را «بدترین توافق ممکن» نامیده و از آن خارج شده‌است، مقام‌های اروپایی امضاکننده توافق درحالی‌که اذعان دارند برجام «ایده آل» نیست، اما می‌گویند برای جلوگیری از دستیابی ایران به بمب هسته‌ای گزینه مناسبی است
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div id="wrapper">
+		
+			<!--__--__--__--__--__--  L O G O  &   N A V    B A R --__--___--__--__--__-->
+			<header>
+				<div id="logo">
+				<h1>خبرگزار<span id="iisrt"><span id="ii">II</span>  <span id="srt">آنلاین</span></span></h1>
+				<div id="tagline">
+					<h2>شبکه مردمی خبر</h2>
+				</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="index.html" id="homenav">خانه</a></li>
+						<li><a href="#" id="blognav" onclick="showSearch()" >جست و جو</a></li>
+						<li><a href="#" id="fullwidthnav" onclick="newsForm()">درج خبر</a></li>
+						<li><a href="#" onclick="showLogin()" id="loginSubmit">ورود/ثبت نام</a></li>
+						<li><a href="#">درباره ما</a></li>
+					</ul>
+				</nav>
+			</header>
+			
+
+			<div id="form">
+
+				<input id="username" type="text" placeholder="  نام کاربری   " required>
+				<input id="password" type="password" placeholder="  گذرواژه   " required>
+				<input id="search" type="text" placeholder="   جست و جو   ">
+				<select id="cat">
+					<option value="all">همه</option>
+					<option value="sport">ورزشی</option>
+					<option value="poletic">سیاسی</option>
+					<option value="art">هنر و فرهنگ</option>
+					<option value="breaking">حوادث</option>
+				</select>
+				<button id="submition" onclick="doLogin()">ارسال</button>
+				<input id="mail" type="email" placeholder="  رایانامه   " >
+				<a href="#" onclick="showSubmit()" id="submitLink">ثبت نام</a>
+			</div>
+			
+
+
+			<!--__--__--__--__--  T H E    S L I D E R --__--__--__--___--__--__--__-->
+			<div class="slider-wrapper theme-default">
+				<div id="slider" class="nivoSlider">
+					<img src="images/slide1.jpg" alt="" / title="درگیری ها در غزه همچنان ادامه دارد،شمار کشته ها به 9 تن رسیده است">
+					<a href="http://geeksband.com"><img src="images/slide2.jpg" alt="" title="پیروزی مقتدرانه ی بانوان ایران" /></a>
+					<img src="images/slide3.jpg" alt="" title="شاخص آلودگی هوای تهران اکنون سالم است" />
+					<img src="images/slide4.jpg" alt="" title="...افزایش قیمت محصولات ایران خودرو به زودی"/>
+				</div>
+			</div>
+			<script type="text/javascript">
+			$(window).load(function() {
+				$('#slider').nivoSlider({pauseTime: 6000,});
+			});
+			</script>
+			
+			<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+			<section>
+				<div id="line">
+					<div class="dline"></div>
+					<h1>خلاصه آخرین اخبار</h1>
+					<div class="dline"></div>
+				</div>
+				<div id="ourserv">
+					<article>
+						<h1>سخنگوی وزارت خارجه</h1>
+						<img src="images/1.jpg" alt="" />
+						<p>
+							بجز برجام هیچ مذاکره‌ای با اتحادیه اروپا نداریم/ هر دولتی در عراق تشکیل شود، شریک خوب ایران است
+						</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+					<article>
+						<h1>سرپرست باشگاه پرسپولیس</h1>
+						<img src="images/2.jpg" alt="" />
+						<p>انتظار نداشتیم حسینی از تیم ملی خط بخورد/ ناگفته‌هایی از کی‌روش داریم
+							سرپرست باشگاه پرسپولیس در مورد شرایط باشگاه در نقل و انتقالات صحبت کرد.</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+					<article>
+						<h1>کالاهای گران و رمضان</h1>
+						<img src="images/3.jpg" alt="" />
+						<p>در ماه رمضان مردم بیشتر به دنبال خرید کالاهای اساسی هستند، به همین جهت افزایش تقاضا برای کالاهای اساسی ممکن است قیمت برخی از آن‌ها را دستخوش تغییراتی کند.</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+					<article>
+						<h1>باران کوثری:</h1>
+						<img src="images/4.jpg" alt="" />
+						<p>می‌ترسم مقابل مردم قرار بگیرم/ در فیلم سفارشی بازی نمی‎‌کنم
+							باران کوثری بازیگر سینما گفت: فکر می کنم ترسناک‌ترین چیز این است که من یا ما روزی در مقابل مردم قرار بگیریم یا در فیلم‌های بازی کنیم که کاملا سفارشی هستند و بر ضد مردم هستند.</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+
+					<article>
+						<h1>دیدار اعضای امید با شهردار</h1>
+						<img src="images/5.jpg" alt="" />
+						<p>یک عضو فراکسیون امید مجلس از برگزاری اولین جلسه شورای ۵۱ نفره امید (متشکل از اعضای مجمع نمایندگان تهران و اعضای شورای شهر) با شهردار و استاندار تهران خبر داد.</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+					<article class="lastarticle">
+						<h1>رکورد پرفروش ترین فیلم آمریکا</h1>
+						<img src="images/6.jpg" alt="" />
+						<p> فیلم Deadpool 2 با ثبت یک رکورد کار خود را در گیشه‌های آمریکای شمالی آغاز کرده است. در جریان پیش‌نمایش روز پنج‌شنبه، این فیلم مورد انتظار موفق شد ۱۸.۶ میلیون دلار فروش کند</p>
+						<a href="fullwidth.html" class="rm">بیشتر</a>
+					</article>
+				</div>
+				
+			</section>				
+			<!--__--__--__--__--  T H E    F O O T E R --__--__--__--___--__--__--__-->
+			<footer>
+				
+			</footer>
+		</div>			
+	</body>
+</html>
+		
+		
+			
+    
+    
