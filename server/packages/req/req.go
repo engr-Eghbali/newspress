@@ -2,6 +2,7 @@ package magic
 
 import (
 	"log"
+	"strings"
 
 	mgo "gopkg.in/mgo.v2"
 
@@ -212,4 +213,49 @@ func SendNews(user string, title string, keywords string, time string, text stri
 		}
 
 	}
+}
+
+func SearchNews(category string, query string) (respose []News, flag bool) {
+
+	var tmp []News
+	var result []News
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return result, false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("news").C("news")
+
+	if category == "all" {
+
+		err = c.Find(bson.M{"$or": []bson.M{bson.M{"title": bson.RegEx{".*" + query + ".*", ""}}, bson.M{"text": bson.RegEx{".*" + query + ".*", ""}}}}).All(&result)
+	} else {
+
+		log.Print(category)
+		err = c.Find(bson.M{"keyword": category}).All(&tmp)
+		for _, res := range tmp {
+			log.Print(res.Keyword)
+			if strings.Contains(res.Text, query) || strings.Contains(res.Title, query) {
+				result = append(result, res)
+			}
+		}
+
+	}
+
+	if err != nil {
+
+		log.Print(err)
+		log.Print("\n")
+		return result, false
+	} else {
+
+		return result, true
+	}
+
 }

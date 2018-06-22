@@ -433,3 +433,48 @@ function dislike(id){
       }
 
   }
+
+
+function search(){
+    var category=$("#cat").val();
+    var query   =$("#search").val();
+
+    if (query.length<2){
+        alert("مقدار جست و جو نمی تواند خالی باشد.");
+    }else{
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+    
+            if(this.responseText!="0"){
+
+                $("#slider").remove();
+                $(".nivo-controlNav").remove();
+                $("#title").text("نتایج یافت شده");
+                $("#ourserv").remove();
+               
+               var resp=this.responseText;
+
+               var division = document.createElement("div");
+               $(division).attr("id","ourserv");
+       
+               division.innerHTML=resp;
+              document.getElementById("line").after(division);
+       
+    
+            }else{
+                alert("خطا، مجددا تلاش کنید");
+            }
+        }
+      };
+    
+      xhttp.open("POST", "http://localhost:3000/searchNews", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("cat="+category+"&query="+query);
+
+
+      }
+
+    }
+

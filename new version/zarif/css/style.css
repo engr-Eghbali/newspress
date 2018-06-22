@@ -38,8 +38,7 @@ a:hover{
 }
 p{
 	margin-bottom: 8px;
-	height: 20vh;
-	overflow: scroll;
+	
 }
 ::-moz-selection {
        background-color: #B82924;
@@ -519,7 +518,7 @@ footer{
 	height: 100%;
 	position: fixed;
 	z-index: 999;
-	background-color: #F2F2F2;
+	background: url('../images/bg.png') repeat;
 	opacity: 0.96;
 	display: none;
 	

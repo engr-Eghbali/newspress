@@ -245,7 +245,7 @@ func upload_ctrl(w http.ResponseWriter, r *http.Request) {
 		defer file.Close()
 
 		fmt.Fprintf(w, "%v", handler.Header)
-		f, err := os.OpenFile("./files/"+filename+"jpg", os.O_WRONLY|os.O_CREATE, 0666)
+		f, err := os.OpenFile("./files/"+filename+".jpg", os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -278,6 +278,36 @@ func sendNews_ctrl(w http.ResponseWriter, r *http.Request) {
 			return
 		} else {
 			fmt.Fprintf(w, id)
+			return
+		}
+
+	}
+
+}
+
+func searchNews_ctrl(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "text/javascript")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	var result string
+
+	if r.Method == "POST" {
+
+		r.ParseForm()
+		category := r.Form["cat"][0]
+		query := r.Form["query"][0]
+
+		resp, flg := req.SearchNews(category, query)
+
+		if flg {
+
+			for _, temp := range resp {
+				result = result + "<article><h1>" + temp.Title + "</h1><img src=\"" + temp.File + "\" alt=\"\" /><p>" + temp.Text[0:300] + "...</p><a href=\"#\" class=\"rm\" onclick=\"more('" + temp.ID.Hex() + "')\">بیشتر</a></article>"
+			}
+			fmt.Fprintf(w, result)
+			return
+		} else {
+			fmt.Fprintf(w, "0")
 			return
 		}
 
@@ -494,6 +524,29 @@ func main() {
 		IsDevelopment: true, // This will cause the AllowedHosts, SSLRedirect, and STSSeconds/STSIncludeSubdomains options to be ignored during development. When deploying to production, be sure to set this to false.
 	})
 
+	searchNews_rout := secure.New(secure.Options{
+		AllowedHosts:            []string{"ssl.example.com"},                     // AllowedHosts is a list of fully qualified domain names that are allowed. Default is empty list, which allows any and all host names.
+		HostsProxyHeaders:       []string{"X-Forwarded-Hosts"},                   // HostsProxyHeaders is a set of header keys that may hold a proxied hostname value for the request.
+		SSLRedirect:             true,                                            // If SSLRedirect is set to true, then only allow HTTPS requests. Default is false.
+		SSLTemporaryRedirect:    false,                                           // If SSLTemporaryRedirect is true, the a 302 will be used while redirecting. Default is false (301).
+		SSLHost:                 "ssl.example.com",                               // SSLHost is the host name that is used to redirect HTTP requests to HTTPS. Default is "", which indicates to use the same host.
+		SSLProxyHeaders:         map[string]string{"X-Forwarded-Proto": "https"}, // SSLProxyHeaders is set of header keys with associated values that would indicate a valid HTTPS request. Useful when using Nginx: `map[string]string{"X-Forwarded-Proto": "https"}`. Default is blank map.
+		STSSeconds:              315360000,                                       // STSSeconds is the max-age of the Strict-Transport-Security header. Default is 0, which would NOT include the header.
+		STSIncludeSubdomains:    true,                                            // If STSIncludeSubdomains is set to true, the `includeSubdomains` will be appended to the Strict-Transport-Security header. Default is false.
+		STSPreload:              true,                                            // If STSPreload is set to true, the `preload` flag will be appended to the Strict-Transport-Security header. Default is false.
+		ForceSTSHeader:          false,                                           // STS header is only included when the connection is HTTPS. If you want to force it to always be added, set to true. `IsDevelopment` still overrides this. Default is false.
+		FrameDeny:               true,                                            // If FrameDeny is set to true, adds the X-Frame-Options header with the value of `DENY`. Default is false.
+		CustomFrameOptionsValue: "SAMEORIGIN",                                    // CustomFrameOptionsValue allows the X-Frame-Options header value to be set with a custom value. This overrides the FrameDeny option. Default is "".
+		ContentTypeNosniff:      true,                                            // If ContentTypeNosniff is true, adds the X-Content-Type-Options header with the value `nosniff`. Default is false.
+		BrowserXssFilter:        true,                                            // If BrowserXssFilter is true, adds the X-XSS-Protection header with the value `1; mode=block`. Default is false.
+		CustomBrowserXssValue:   "1; report=https://example.com/xss-report",      // CustomBrowserXssValue allows the X-XSS-Protection header value to be set with a custom value. This overrides the BrowserXssFilter option. Default is "".
+		ContentSecurityPolicy:   "default-src 'self'",                            // ContentSecurityPolicy allows the Content-Security-Policy header value to be set with a custom value. Default is "".
+		// PublicKey: `pin-sha256="base64+primary=="; pin-sha256="base64+backup=="; max-age=5184000; includeSubdomains; report-uri="https://www.example.com/hpkp-report"`, // PublicKey implements HPKP to prevent MITM attacks with forged certificates. Default is "".
+		//ReferrerPolicy: "same-origin" // ReferrerPolicy allows the Referrer-Policy header with the value to be set with a custom value. Default is "".
+		//***triger***
+		IsDevelopment: true, // This will cause the AllowedHosts, SSLRedirect, and STSSeconds/STSIncludeSubdomains options to be ignored during development. When deploying to production, be sure to set this to false.
+	})
+
 	app1 := getNews_rout.Handler(http.HandlerFunc(Preview_ctrl))
 	app2 := login_rout.Handler(http.HandlerFunc(login_ctrl))
 	app3 := submit_rout.Handler(http.HandlerFunc(submit_ctrl))
@@ -503,6 +556,7 @@ func main() {
 	app7 := cm_rout.Handler(http.HandlerFunc(cm_ctrl))
 	app8 := upload_rout.Handler(http.HandlerFunc(upload_ctrl))
 	app9 := sendNews_rout.Handler(http.HandlerFunc(sendNews_ctrl))
+	app10 := searchNews_rout.Handler(http.HandlerFunc(searchNews_ctrl))
 
 	http.Handle("/getnews", app1)
 	http.Handle("/login", app2)
@@ -513,6 +567,7 @@ func main() {
 	http.Handle("/Cm", app7)
 	http.Handle("/upload", app8)
 	http.Handle("/sendNews", app9)
+	http.Handle("/searchNews", app10)
 
 	log.Fatal(http.ListenAndServe("127.0.0.1:3000", nil))
 
