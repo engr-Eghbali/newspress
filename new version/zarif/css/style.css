@@ -566,7 +566,7 @@ footer{
 #newsFile{
 	margin-right: 25%;
 	outline: none;
-	margin-top: 6%;
+	margin-top: 2%;
 }
 
 #sendNews{
@@ -739,4 +739,11 @@ p2{
 	font-family: 'LeagueGothic';
 	width: 5%;
 	float: right;
+}
+
+#preview{
+	margin-top: -5vh;
+	margin-right: 35%;
+	width: 100px;
+	height: 100px;
 }

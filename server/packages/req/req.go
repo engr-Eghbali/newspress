@@ -259,3 +259,51 @@ func SearchNews(category string, query string) (respose []News, flag bool) {
 	}
 
 }
+
+func ModifyNews(user string, title string, keywords string, time string, text string, newsID string) (flag bool) {
+
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return false
+	} else {
+
+		defer session.Close()
+		session.SetMode(mgo.Monotonic, true)
+		c := session.DB("news").C("news")
+		if len(keywords) > 2 {
+
+			err = c.Update(bson.M{"_id": bson.ObjectIdHex(newsID)}, bson.M{"$set": bson.M{"date": time, "keyword": keywords, "text": text, "title": title}})
+			if err != nil {
+				log.Print("\nupdate error:")
+				log.Print(err)
+				log.Print("\n")
+				return false
+			} else {
+				log.Print("\nupdate done by:")
+				log.Print(user)
+				log.Print("\n")
+				return true
+			}
+		} else {
+
+			err = c.Update(bson.M{"_id": bson.ObjectIdHex(newsID)}, bson.M{"$set": bson.M{"date": time, "text": text, "title": title}})
+			if err != nil {
+				log.Print("\nupdate error:")
+				log.Print(err)
+				log.Print("\n")
+				return false
+			} else {
+				log.Print("\nupdate done by:")
+				log.Print(user)
+				log.Print("\n")
+				return true
+			}
+
+		}
+
+	}
+}

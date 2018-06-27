@@ -50,9 +50,10 @@
 			<br>
 			<textarea id="newsText" placeholder="متن خبر"></textarea>
 			<br>
-			<input id="newsFile" name="newsfile" type="file" accept="images">
+			<input id="newsFile" name="newsfile" type="file" onchange="readURL(this);" accept="images">
 			<br>
 			<button id="sendNews" onclick="sendNews()">درج خبر</button>
+			<img id="preview" src="#" alt="preview" />
 		</div>
 		</div>
 
