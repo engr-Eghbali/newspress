@@ -36,7 +36,20 @@
         <title>Source X SRT</title>
     </head>
 	<body id="home">
-     <div id="profile"></div>
+     <div id="profile">
+	
+		<label id="profilepic" ><input id="uploadImage" type="file" accept="image/*" style="display:none;" /></label>
+		<div id="rate"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
+		<br>
+		<br>
+		<div id="stat">
+		<p1>دوستان : 20</p1>
+		<br>
+		<p1>دنبال شده : 10</p1>
+		<br>
+		<p1>کاربر سطح دو</p1>
+	</div>
+	 </div>
 
 
 		<div id="newsForm">
@@ -49,11 +62,12 @@
 			<input id="newsCategory" type="text" placeholder="دسته بندی(کلمات کلیدی را بافاصله جدا کنید)" required>
 			<br>
 			<textarea id="newsText" placeholder="متن خبر"></textarea>
+			<img id="preview" src="#" alt="preview" />
 			<br>
 			<input id="newsFile" name="newsfile" type="file" onchange="readURL(this);" accept="images">
 			<br>
 			<button id="sendNews" onclick="sendNews()">درج خبر</button>
-			<img id="preview" src="#" alt="preview" />
+		
 		</div>
 		</div>
 

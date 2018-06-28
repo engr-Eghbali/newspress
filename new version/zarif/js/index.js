@@ -78,7 +78,7 @@ function login(u,p){
 
             localStorage.setItem("pressUser",resp[1]);
             localStorage.setItem("pressPass",password);
-            $("#profile").text(resp[1]+"خوش آمدید  ");
+            //$("#profile").text(resp[1]+"خوش آمدید  ");
             $("#loginSubmit").text("خروج");
             $("#loginSubmit").attr("onclick","logout()");
             $("#loginSubmit").css({"color":"tomato"});
@@ -311,6 +311,10 @@ function dislike(id){
 
   function sendCm(newsID){
       var user=localStorage.getItem("pressUser");
+      if(user==null){
+          alert("ابتدا باید وارد شوید یا ثبت نام کنید.");
+          return;
+      }
       var Cm=$("#inputCm").val();
       if(Cm.length !=""){
 
@@ -455,10 +459,13 @@ function search(){
                 $("#ourserv").remove();
                
                var resp=this.responseText;
-
+               
                var division = document.createElement("div");
                $(division).attr("id","ourserv");
        
+               if(resp==""){
+                   resp="<div id=\"nf404\"><p1>متاسفانه نتیجه ای یافت نشد.</p1><br><br><img src=\"./images/sad.svg\" id=\"sad\"><br><p2>برای نتایج بهتر از کلمات کلیدی برای جست و جو استفاده کنید</p2></div>";
+               }
                division.innerHTML=resp;
               document.getElementById("line").after(division);
        
@@ -486,10 +493,11 @@ function search(){
             reader.onload = function (e) {
                 $('#preview')
                     .attr('src', e.target.result)
-                    .width(100)
-                    .height(100);
+                    .width(200)
+                    .height(200);
             };
-
+             
+            $("#preview").show();
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -555,6 +563,10 @@ function editNews(id){
 
 function edit(id){
 
+    if(localStorage.getItem("pressUser")==null){
+        alert("ابتدا باید ثبت نام کنید یا وارد شوید");
+        return;
+    }
     var text=$(".textCm").text();
     text=text.replace(text.substring(text.indexOf("@"),text.indexOf(":")),"");
     var title=$("#head"+id).text();
@@ -566,3 +578,33 @@ function edit(id){
     newsForm();
     $("#showNews").hide();
 }
+
+
+
+$(document).ready(function(){
+
+
+ 
+    var input = document.getElementById('uploadImage');
+   input.onchange = function(evt){
+       var tgt = evt.target || window.event.srcElement, 
+           files = tgt.files;
+  
+       if (FileReader && files && files.length) {
+           var fr = new FileReader();
+           fr.onload = function () {
+               localStorage['pressProfilePic'] = fr.result;
+           }
+           fr.readAsDataURL(files[0]);
+       
+       location.reload();
+         }
+       
+   }
+   if (localStorage['pressProfilePic'].length >100){
+    var el = document.getElementById('profilepic');
+    el.style.backgroundImage = 'url(' + localStorage['raadifeProfilePic'] + ')';
+   }
+   
+  });
+  
