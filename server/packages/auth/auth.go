@@ -32,6 +32,14 @@ type User struct {
 	Password string `json:"password"`
 
 	Usertype string `json:"userType"`
+
+	Rate int64 `json:"rate"`
+
+	Followers []string `json:"followers"`
+
+	Followings []string `json:"followings"`
+
+	Posted []string `json:"posted"`
 }
 
 func LoginProcess(user string, pass string) (resp User, flg bool) {
@@ -98,7 +106,8 @@ func SubmitProcess(user string, pass string) (resp User, flg bool) {
 
 		result.Username = user
 		result.Password = pass
-		result.Usertype = "user"
+		result.Usertype = "کاربر جدید"
+		result.Rate = 1
 		err = c.Insert(result)
 		if err != nil {
 			log.Print("\n!!!!--submit err:")

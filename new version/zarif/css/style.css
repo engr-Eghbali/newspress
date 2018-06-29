@@ -718,6 +718,7 @@ footer{
 	width: 12%;
 	direction: rtl;
 	height: 20em;
+	display: none;
 }
 #search{
 	display: none;
@@ -750,7 +751,7 @@ p2{
 	width: 16%;
 	height: 28%;
 	position: fixed;
-	display: none;
+	
 }
 #nf404{
 
@@ -797,4 +798,68 @@ p2{
 	position: relative;
 	height: 30%;
 	width: 70%;
+}
+
+#contacts{
+
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 999;
+	background: url('../images/bg.png') repeat;
+	opacity: 0.98;
+	display: none;
+
+}
+#contForm{
+	width: 36%;
+	height: 72%;
+	direction: rtl;
+	background-color: whitesmoke;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8vh;
+	border-radius: 8px;
+	border: 2px solid black;
+
+}
+#frate{
+	margin-left: 2vh;
+	float: left;
+	color: #B82924;
+	direction: rtl;
+	font-size: 2vh;
+}
+
+p3{
+	color: black;
+	font-size: 2vh;
+	font-family: 'source';
+	padding-left: 2vh;
+	padding-right: 2vh;
+}
+.contact{
+	width: 100%;
+	height: 10%;
+	border-bottom: 1px solid #b82924;
+}
+#closeContacts{
+	border-radius: 50%;
+	background-color: #B82924;
+	outline: none;
+	border: none;
+	width: 3vh;
+	height: 3vh;
+
+}
+#contForm{
+	overflow-y: scroll;
+}
+
+#uploadImage{
+	left: 24vh;
+	top:3vh;
+	position: relative;
+	height: 10vh;
+	z-index: 9999;
 }

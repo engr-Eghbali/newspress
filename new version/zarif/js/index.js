@@ -17,6 +17,7 @@ function closeForm(){
     $("#newsForm").hide();
 }
 function newsForm(){
+    $("#preview").hide();
     $("#newsForm").show();
 }
 function clsCm(){
@@ -78,11 +79,17 @@ function login(u,p){
 
             localStorage.setItem("pressUser",resp[1]);
             localStorage.setItem("pressPass",password);
+            var division = document.createElement("div");
             //$("#profile").text(resp[1]+"خوش آمدید  ");
+            $("#rate").append(resp[2]);
+            division.innerHTML=resp[3];
+
+            $("#stat").append(division);
             $("#loginSubmit").text("خروج");
             $("#loginSubmit").attr("onclick","logout()");
             $("#loginSubmit").css({"color":"tomato"});
             $("#form").hide();
+            $("#profile").show();
 
         }else{
             localStorage.removeItem("pressUser");
@@ -112,6 +119,7 @@ function doLogin(){
 function logout(){
     localStorage.removeItem("pressUser");
     localStorage.removeItem("pressPass");
+    localStorage.removeItem("pressProfilePic");
     location.reload();
 }
 
@@ -575,7 +583,7 @@ function edit(id){
     $("#newsText").val(text);
     $("#preview").attr('src',img);
     $("#sendNews").attr("onclick","editNews('"+id+"')");
-    newsForm();
+    $("#newsForm").show();
     $("#showNews").hide();
 }
 
@@ -603,8 +611,108 @@ $(document).ready(function(){
    }
    if (localStorage['pressProfilePic'].length >100){
     var el = document.getElementById('profilepic');
-    el.style.backgroundImage = 'url(' + localStorage['raadifeProfilePic'] + ')';
+    el.style.backgroundImage = 'url(' + localStorage['pressProfilePic'] + ')';
    }
    
   });
   
+
+function showFollowers(){
+
+    var user=localStorage.getItem("pressUser");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        if(this.responseText!="0"){
+            
+            if(this.responseText.length < 10){
+                alert("شما هنوز دوستی رو دنبال نکردین");
+                return;
+            }
+            $("#people").remove();
+            var division = document.createElement("div");
+            $(division).attr("id","people");
+            division.innerHTML=this.responseText;
+            $("#contForm").append(division);
+            $("#contacts").show();
+
+        
+        }else{
+            alert("خطا، مجددا تلاش کنید");
+        }
+    }
+  };
+
+  xhttp.open("POST", "http://localhost:3000/getFollowers", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("username="+user+"&password="+localStorage.getItem("pressPass"));
+
+
+}
+
+
+
+function showFollowings(){
+
+    var user=localStorage.getItem("pressUser");
+
+          
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        if(this.responseText!="0"){
+            
+            if(this.responseText.length < 10){
+                alert("هنوز دنبال کننده ای ندارید");
+                return;
+            }
+             
+            $("#people").remove();
+            var division = document.createElement("div");
+            $(division).attr("id","people");
+            division.innerHTML=this.responseText;
+            $("#contForm").append(division);
+            $("#contacts").show();
+
+        
+        }else{
+            alert("خطا، مجددا تلاش کنید");
+        }
+    }
+  };
+
+  xhttp.open("POST", "http://localhost:3000/getFollowings", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("username="+user+"&password="+localStorage.getItem("pressPass"));
+
+
+}
+
+function closeContacts(){
+
+    $("#contacts").hide(50);
+}
+
+
+function unfollow(unflw){
+
+    var user=localStorage.getItem("pressUser");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        if(this.responseText!="0"){
+            showFollowers();
+        }else{
+            alert("خطا، مجددا تلاش کنید");
+        }
+    }
+  };
+
+  xhttp.open("POST", "http://localhost:3000/unfollow", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("username="+user+"&password="+localStorage.getItem("pressPass")+"&unflw="+unflw);
+}

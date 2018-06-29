@@ -4,6 +4,7 @@ import (
 	"log"
 	"strings"
 
+	auth "../auth"
 	mgo "gopkg.in/mgo.v2"
 
 	"gopkg.in/mgo.v2/bson"
@@ -303,6 +304,118 @@ func ModifyNews(user string, title string, keywords string, time string, text st
 				return true
 			}
 
+		}
+
+	}
+}
+
+func Followers(user string) (ls []auth.User, flg bool) {
+
+	var result auth.User
+	var tmp auth.User
+	var results []auth.User
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return results, false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("userInfo").C("users")
+	err = c.Find(bson.M{"username": user}).One(&result)
+
+	if err != nil {
+
+		log.Print(err)
+		log.Print("\n")
+		return results, false
+	} else {
+
+		for _, temp := range result.Followers {
+			err = c.Find(bson.M{"username": temp}).One(&tmp)
+			results = append(results, tmp)
+		}
+
+		return results, true
+	}
+}
+
+func Followings(user string) (ls []auth.User, flg bool) {
+
+	var result auth.User
+	var tmp auth.User
+	var results []auth.User
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return results, false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("userInfo").C("users")
+	err = c.Find(bson.M{"username": user}).One(&result)
+
+	if err != nil {
+
+		log.Print(err)
+		log.Print("\n")
+		return results, false
+	} else {
+
+		for _, temp := range result.Followings {
+			err = c.Find(bson.M{"username": temp}).One(&tmp)
+			results = append(results, tmp)
+		}
+
+		return results, true
+	}
+}
+
+func Unfollow(user string, unflw string) (flag bool) {
+
+	log.Print(user + "&" + unflw)
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+
+		log.Print("\n!!!!-- DB connection error:")
+		log.Print(err)
+		log.Print("\n")
+		return false
+	}
+
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("userInfo").C("users")
+	idQuerier := bson.M{"username": user}
+	change := bson.M{"$pull": bson.M{"followers": unflw}}
+	err = c.Update(idQuerier, change)
+	if err != nil {
+		log.Print("failed to unfollow:")
+		log.Print(err)
+		return false
+	} else {
+
+		c = session.DB("userInfo").C("users")
+		idQuerier := bson.M{"username": unflw}
+		change := bson.M{"$pull": bson.M{"followings": user}}
+		err = c.Update(idQuerier, change)
+		if err != nil {
+
+			log.Print("failed to unfollow:")
+			log.Print(err)
+			return false
+
+		} else {
+
+			return true
 		}
 
 	}
